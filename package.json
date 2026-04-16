@@ -1,0 +1,23 @@
+{
+  "name": "mdc",
+  "version": "1.0.0",
+  "description": "mon premier mvc",
+  "homepage": "https://github.com/fougerouxjassem83-code/MVC#readme",
+  "bugs": {
+    "url": "https://github.com/fougerouxjassem83-code/MVC/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fougerouxjassem83-code/MVC.git"
+  },
+  "license": "ISC",
+  "author": "aristid",
+  "type": "commonjs",
+  "main": "myserveur.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
