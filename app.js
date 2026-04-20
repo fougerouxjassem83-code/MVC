@@ -61,5 +61,61 @@ sequelize.authenticate()
   .then(() => console.log('Tables créées !'))
   .catch(err => console.error('Erreur :', err));
 
-/*************************************************** */
+
+
+
+
+/******************************************************** */
+/**Mais pour que le CSS fonctionne, il faut aussi dire à Express 
+ * où trouver les fichiers statiques. Ajoute ceci dans ton app.js :
+javascriptapp.use(express.static('public'));**on va utiliser les 
+fichier static qui se trouve dans public****** */
+  /*************************************************** */
+app.use(express.static('public'));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 module.exports = app;

@@ -1,6 +1,6 @@
-/***************************************************** */
-/* Model User */
-/***************************************************** */
+/**************************************************************************************************** */
+/* ICI J'AI CREER UN FICHIER  USER POUR CREES LES UTILISATEURS A L'INSCRIPTIONAIDE D'UN CONSTRUCTEUR */
+/************************************************************************************************** */
 const { DataTypes } = require('sequelize');
 const sequelize = require('../database');
 
@@ -15,9 +15,10 @@ const User = sequelize.define('User', {
   },
   password: {
     type: DataTypes.STRING(55),
-  }
+    unique: true
+}
 });
 
 
-
+/************************* */
 module.exports = User;
