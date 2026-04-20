@@ -4,20 +4,16 @@
 
 
 
+/** ICI JE VAIS CREER UNE FONCTION QUI VA RENDRE LA PAGE D'ACCEUIL.EJS */
 
+module.exports = {
 
-/********************************************************* */
-/*ici j'importe le express pour creer mes routes et 
-aussi j'importe le router de express pour creer mes routes */
-/******************************************************* */
-const express = require('express');
-const router = express.Router();
-/******************************************************** */
-
-
+    acceuilView: (req, res) => {
+        res.render('acceuil');
+    }       
+}
 
 
 /************************************************* */
-/*ici je vais creer une route pour la page d'acceuil 
-je vais utiliser le router de express pour creer ma route */
+/* */
 /************************************************* */

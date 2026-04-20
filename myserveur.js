@@ -1,6 +1,6 @@
 /************************************************************ */
 /*************************************************************/
-/**********  LE mySERVEUR DE CHAT EN NODE.JS  ***************/
+/**********  LE mySERVEUR NODE.JS  ***************/
 /***********************************************************/
 /**********************************************************/
 
@@ -37,6 +37,39 @@ const numeroPort = 2007;
 server.listen(numeroPort, () => {
     console.log(`mon serveur est en cours d\'exécution sur le port ${numeroPort}`);
 });
+
+
+
+/**************************************************************************** */
+/*ici je vais faire la connexion à ma base de données MySQL grâce à Sequelize*/
+/************************************************************************** */
+
+const sequelize = require('./database');
+// On importe la connexion qu'on vient de configurer
+
+sequelize.authenticate()
+// authenticate() vérifie que la connexion fonctionne
+
+  .then(() => console.log(' Connexion MySQL réussie !'))
+  // Si tout va bien, on affiche un message de succès
+
+  .catch(err => console.error(' Erreur de connexion :', err));
+  // Si ça échoue, on affiche l'erreur
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 module.exports = server;
