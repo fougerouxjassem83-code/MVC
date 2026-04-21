@@ -3,14 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>authentification</title>
+    <title>Inscription</title>
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/register.css">
 </head>
 <body>
-   
-<!-- ici j'inclus la navbar dans ma page d'inscription -->
-<%- include('navbar') %>
 
-    <h1>authentification</h1>
+    <%- include('navbar') %>
 
+    <div class="register-container">
+        <h1>Inscription</h1>
+
+        <form action="/register" method="POST">
+
+            <!-- Champ email -->
+            <input type="email" name="email" placeholder="Email" required>
+
+            <!-- Champ mot de passe -->
+            <div class="password-container">
+                <input type="password" name="password" id="password" placeholder="Mot de passe" required>
+                <i class="fa fa-eye" id="oeil" onclick="voirMotDePasse()"></i>
+            </div>
+
+            <!-- Bouton d'inscription -->
+            <button type="submit">S'inscrire</button>
+
+        </form>
+    </div>
+
+
+
+ <!-- ICI JE VAIS METTRE UN MESSAGE D'ERREUR SI LES CHAMPS NE SONT PAS REMPLIS -->
+    <% if (typeof erreur !== 'undefined') { %>
+    <p class="erreur"><%= erreur %></p>
+<% } %>
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/register.js"></script>    
 </body>
 </html>

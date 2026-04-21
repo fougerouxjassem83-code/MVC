@@ -1,13 +1,24 @@
-
 /*************************************************** */
 /**********ici je rappel mon serveur*************** */
 /************************************************ */
 const express = require('express');
 const app = express();
+
+
+
+/******************************************************** */
+/*ici on dit à Express où trouver les fichiers statiques */
+/****************************************************** */
+app.use(express.static('public'));
+
+
+
+
 /*************************************************** */
-
-
-
+/*ici je creer un middleware pour récuperé les infos */
+/****************************************************/
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 
 
@@ -15,9 +26,6 @@ const app = express();
 /*ici j'importe mon controller d'acceuil pour creer mes routes */
 /*************************************************** */
 const acceuilRoute = require('./routes/acceuilRoute');
-/*************************************************** */
-
-
 
 
 
@@ -26,7 +34,6 @@ const acceuilRoute = require('./routes/acceuilRoute');
 /*************************************************** */
 const authentificationRoute = require('./routes/authentificationRoute');
 app.use("/", authentificationRoute);
-
 
 
 
@@ -47,6 +54,7 @@ app.use("/", acceuilRoute);
 
 
 
+
 /****************************************************************** */
 /*ici j'importe ma base de données pour faire la connexion à MySQL */
 /**************************************************************** */
@@ -58,25 +66,11 @@ sequelize.authenticate()
     console.log('Connexion MySQL réussie !');
     return sequelize.sync();
   })
-  .then(() => console.log('Tables créées !'))
+  .then(() => console.log())
   .catch(err => console.error('Erreur :', err));
 
 
-
-
-
-/******************************************************** */
-/**Mais pour que le CSS fonctionne, il faut aussi dire à Express 
- * où trouver les fichiers statiques. Ajoute ceci dans ton app.js :
-javascriptapp.use(express.static('public'));**on va utiliser les 
-fichier static qui se trouve dans public****** */
-  /*************************************************** */
-app.use(express.static('public'));
-
-
-
-
-
+module.exports = app;
 
 
 

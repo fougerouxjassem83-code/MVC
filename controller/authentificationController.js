@@ -15,33 +15,43 @@ module.exports = {
 
 
 /********************************************************************************************** */
-/*Ici j'e vais créer un un codage qui vas permetre de réécupéré les données du formulaire */
+/*Ici je vais créer les fonctions qui vont gérer l'authentification */
 /*********************************************************************************************** */
 
-/** ICI JE VAIS CREER UNE FONCTION QUI VA RENDRE LA PAGE D'ACCEUIL.EJS */
-
 const User = require('../models/User');
-/* On importe le modèle User pour pouvoir interagir avec la table Users */
 
 module.exports = {
 
     registerView: (req, res) => {
-        /* On affiche la page register.ejs */
         res.render('register');
     },
     
     registerUser: async (req, res) => {
-        /* On récupère les données du formulaire */
-        console.log("### CONTROLLER D'AUTHENTIFICATION ###");
+        const email = req.body.email;
+        const password = req.body.password;
+
+        /* Si l'email ou le mot de passe est vide on renvoie à la page register */
+        if (!email || !password) {
+            return res.render('register', { erreur: 'Veuillez remplir tous les champs !' });
+        }
+
+        /* On vérifie si l'email existe déjà dans la base de données */
+        const userExiste = await User.findOne({ where: { email: email } });
+
+        /* Si l'email existe déjà on renvoie à la page register avec un message d'erreur */
+        if (userExiste) {
+            return res.render('register', { erreur: 'Cet email est déjà utilisé !' });
+        }
 
         const user = await User.create({
-            /* On insère un nouvel utilisateur dans la table Users */
-            email: req.body.email,
-            password: req.body.password
+            email: email,
+            password: password
         });
 
         console.log('Utilisateur créé !', user);
-        /* On redirige vers la page d'acceuil après l'inscription */
-        res.redirect('/');
+        res.redirect('/acceuil');
     }
 }
+
+
+
