@@ -58,7 +58,7 @@ app.use("/", acceuilRoute);
 /****************************************************************** */
 /*ici j'importe ma base de données pour faire la connexion à MySQL */
 /**************************************************************** */
-const sequelize = require('./database');
+const sequelize = require('./config/db.config');
 const User = require('./models/User');
 
 sequelize.authenticate()
