@@ -18,7 +18,7 @@ const User = sequelize.define('User', {
   },
 
   password: {
-    type: DataTypes.STRING(55),   /* varchar(55) */
+    type: DataTypes.STRING(255),   /* varchar(255) */
   }
 
 });

@@ -54,7 +54,6 @@ app.use("/", acceuilRoute);
 
 
 
-
 /****************************************************************** */
 /*ici j'importe ma base de données pour faire la connexion à MySQL */
 /**************************************************************** */
@@ -64,16 +63,13 @@ const User = require('./models/User');
 sequelize.authenticate()
   .then(() => {
     console.log('Connexion MySQL réussie !');
-    return sequelize.sync();
+    return sequelize.sync({ alter: true })
   })
-  .then(() => console.log())
+  .then(() => console.log('Tables mises à jour !'))
   .catch(err => console.error('Erreur :', err));
 
 
 module.exports = app;
-
-
-
 
 
 
