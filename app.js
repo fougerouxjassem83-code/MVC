@@ -1,74 +1,93 @@
-/*************************************************** */
-/**********ici je rappel mon serveur*************** */
-/************************************************ */
+
+/*************************************************************************************************/
+/**                                                                                             **/
+/**   On importe express pour créer l'application                                              **/
+/**                                                                                             **/
+/*************************************************************************************************/
 const express = require('express');
 const app = express();
 
 
-
-/******************************************************** */
-/*ici on dit à Express où trouver les fichiers statiques */
-/****************************************************** */
+/*************************************************************************************************/
+/**                                                                                             **/
+/**   On dit à Express où trouver les fichiers statiques comme le CSS et le JS                 **/
+/**   Tout ce qui est dans le dossier "public" sera accessible directement                     **/
+/**                                                                                             **/
+/*************************************************************************************************/
 app.use(express.static('public'));
 
 
-
-
-/*************************************************** */
-/*ici je creer un middleware pour récuperé les infos */
-/****************************************************/
+/*************************************************************************************************/
+/**                                                                                             **/
+/**   On crée les middlewares pour récupérer les données des formulaires                       **/
+/**   Sans ça, req.body serait undefined et on ne pourrait pas lire les données               **/
+/**                                                                                             **/
+/*************************************************************************************************/
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 
-
-/*************************************************** */
-/*ici j'importe mon controller d'acceuil pour creer mes routes */
-/*************************************************** */
+/*************************************************************************************************/
+/**                                                                                             **/
+/**   On importe les routes d'acceuil pour gérer les pages principales du site                **/
+/**                                                                                             **/
+/*************************************************************************************************/
 const acceuilRoute = require('./routes/acceuilRoute');
 
 
-
-/*************************************************** */
-/*ici j'importe mon controller d'authentification pour creer mes routes */
-/*************************************************** */
+/*************************************************************************************************/
+/**                                                                                             **/
+/**   On importe les routes d'authentification pour gérer l'inscription et la connexion        **/
+/**   Toutes les routes commençant par "/" seront gérées par ce fichier                        **/
+/**                                                                                             **/
+/*************************************************************************************************/
 const authentificationRoute = require('./routes/authentificationRoute');
 app.use("/", authentificationRoute);
 
 
-
-
-/*************************************************** */
-/*ici j'utilise le moteur de template ejs pour rendre mes vues */
-/*************************************************** */
+/*************************************************************************************************/
+/**                                                                                             **/
+/**   On dit à Express où trouver les vues et quel moteur de template utiliser                 **/
+/**   On utilise EJS pour afficher nos pages HTML dynamiquement                                **/
+/**                                                                                             **/
+/*************************************************************************************************/
 app.set('views', './views');
 app.set('view engine', 'ejs');
 
 
-
-
-/*************************************************** */
-/*ici j'utilise mon controller d'acceuil pour creer mes routes */
-/*************************************************** */
+/*************************************************************************************************/
+/**                                                                                             **/
+/**   On utilise les routes d'acceuil pour gérer les pages principales du site                **/
+/**                                                                                             **/
+/*************************************************************************************************/
 app.use("/", acceuilRoute);
 
 
-
-/****************************************************************** */
-/*ici j'importe ma base de données pour faire la connexion à MySQL */
-/**************************************************************** */
+/*************************************************************************************************/
+/**                                                                                             **/
+/**   On importe la connexion à la base de données MySQL grâce à Sequelize                    **/
+/**   On importe aussi le modèle User pour créer la table Users automatiquement               **/
+/**                                                                                             **/
+/*************************************************************************************************/
 const sequelize = require('./config/db.config');
 const User = require('./models/User');
 
 sequelize.authenticate()
   .then(() => {
     console.log('Connexion MySQL réussie !');
+
+    /* alter:true met à jour les tables si on a modifié les modèles */
     return sequelize.sync({ alter: true })
   })
   .then(() => console.log('Tables mises à jour !'))
   .catch(err => console.error('Erreur :', err));
 
 
+/*************************************************************************************************/
+/**                                                                                             **/
+/**   On exporte l'application pour qu'elle soit utilisée dans myserveur.js                   **/
+/**                                                                                             **/
+/*************************************************************************************************/
 module.exports = app;
 
 
@@ -85,27 +104,3 @@ module.exports = app;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-module.exports = app;
